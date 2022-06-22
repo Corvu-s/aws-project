@@ -1,33 +1,20 @@
 variables:
   DOCKER_REGISTRY: 351659483310.dkr.ecr.us-west-2.amazonaws.com
+  AWS_DEFAULT_REGION: us-west-2
   APP_NAME: project-repo
-  TAG: "$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID"
+  DOCKER_HOST: tcp://docker:2375
 
-stages:
-  - build
-  - build-docker-image
-  - push-image-to-aws-ecr
-
-build-java-project:
-  stage: build
-  script: mvn package
-  artifacts:
-    paths:
-      - /home/gitlab-runner/
-
-build-docker-image:
-  stage: build-docker-image
-  script:
-    - docker info
-    - docker build -t $DOCKER_REGISTRY/$APP_NAME:"$TAG" .
-
-Push Docker Image to AWS ECR:
-  stage: push-image-to-aws-ecr
+publish:
   image:
-    name: $DOCKER_REGISTRY/$APP_NAME:"$TAG"
+    name: amazon/aws-cli
+    entrypoint: [""]
   services:
     - docker:dind
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
   script:
-    - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - docker tag $DOCKER_REGISTRY/$APP_NAME:"$TAG" $DOCKER_REGISTRY/$APP_NAME:"$TAG"
-    - docker push $DOCKER_REGISTRY/$APP_NAME:"$TAG"
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
