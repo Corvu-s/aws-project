@@ -10,7 +10,7 @@ variables:
 publish:
   stage: build
   image:
-    name: docker:latest
+    name: docker:19-dind
   services:
     - docker:19-dind
   before_script:
