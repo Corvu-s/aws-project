@@ -1,25 +1,26 @@
-# Simple example of CI to build a Docker container and push it to Amazon ECR
+stages:
+  - build
+
 variables:
-  DOCKER_REGISTRY: 351659483310.dkr.ecr.us-west-2.amazonaws.com
-  AWS_DEFAULT_REGION: us-west-2
-  APP_NAME: project-repo
-  DOCKER_HOST: "tcp://localhost:2375"
-  DOCKER_DRIVER: overlay2
+  IMAGE_NAME: crawler
+  TAG_LATEST: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/project-repo:latest
+  TAG_COMMIT: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/project-repo:$CI_COMMIT_SHORT_SHA
   DOCKER_TLS_CERTDIR: ""
 
-publish:
+docker:
+  image: docker:stable
   stage: build
-  image:
-    name: docker:19-dind
+  only:
+    - master
   services:
-    - docker:19-dind
+    - docker:dind
   before_script:
-    - apk add --no-cache curl jq python3 py3-pip
-    - pip install awscli
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-    - aws --version
-    - docker info
-    - docker --version
+    - apk add --no-cache python3 py3-pip
+    - pip3 install --no-cache-dir awscli
   script:
-    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
-    - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
+    - aws ecr get-login-password --region $AWS_REGION |
+      docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+    - docker pull $TAG_LATEST || true
+    - docker build --cache-from $TAG_LATEST -t $TAG_COMMIT -t $TAG_LATEST .
+    - docker push $TAG_COMMIT
+    - docker push $TAG_LATEST
