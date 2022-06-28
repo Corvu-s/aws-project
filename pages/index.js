@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <p>Lukes Thing</p>
+      <p>Lukes Thing with auto push!</p>
     </div>
   );
 }
