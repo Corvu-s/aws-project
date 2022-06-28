@@ -1,0 +1,6 @@
+[
+  {
+    "name": "frontendContainer",
+    "imageUri": "351659483310.dkr.ecr.us-west-2.amazonaws.com/project-repo:latest"
+  }
+]
