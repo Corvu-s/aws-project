@@ -1,9 +1,8 @@
+import { useRouter } from "next/router";
+import Booking from "./Booking";
 export default function Home() {
-  return (
-    <div>
-      <p>Lol this cicd thing is strange</p>
-    </div>
-  );
+  const router = useRouter();
+  return <Booking />;
 }
 
 export async function getServerSideProps(context) {
