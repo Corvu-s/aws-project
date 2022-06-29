@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <p>Lukes Thing, now with coolness?</p>
+      <p>Lol this cicd thing is strange</p>
     </div>
   );
 }
