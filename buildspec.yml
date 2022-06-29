@@ -16,6 +16,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 351659483310.dkr.ecr.us-west-2.amazonaws.com/project-repo:latest
-      - printf '[{"name":"projectTask","imageUri":"%s"}]' 351659483310.dkr.ecr.us-west-2.amazonaws.com/project-repo:latest > imagedefinitions.json
+      - printf '[{"name":"frontendContainer","imageUri":"%s"}]' 351659483310.dkr.ecr.us-west-2.amazonaws.com/project-repo:latest > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
