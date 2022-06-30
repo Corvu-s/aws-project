@@ -1,5 +1,3 @@
-import Button from "@mui/material/Button";
-
 export default function Header({ pageName }) {
   return (
     <div className="flex space-x-2 justify-center">
