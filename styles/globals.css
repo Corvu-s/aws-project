@@ -13,3 +13,33 @@ body {
 .App {
   font-family: sans-serif;
 }
+.bookingButton {
+  background: #e6f4f8;
+  width: 182px;
+  height: 50px;
+}
+.headerModeText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+.headerBackButton {
+  width: 167px;
+  height: 50px;
+  background: #009ddc;
+}
+.headerBackText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+}
+.bookingForm {
+  background: #efeff0;
+}
+.bookCarButton {
+  width: 167px;
+  height: 50px;
+  background: #009ddc;
+}

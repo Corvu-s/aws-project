@@ -1,5 +1,43 @@
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Header from "../components/Header";
 export default function Booking() {
+  function bookingForm() {
+    return (
+      <div className="flex justify-center space-y-2 bookingForm">
+        <Box
+          className="flex flex-col space-y-2"
+          component="form"
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="outlined-basic"
+            label="Departure Time"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Departure Address"
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-basic"
+            label="Destination Address"
+            variant="outlined"
+          />
+          <TextField id="outlined-basic" label="Phone#" variant="outlined" />
+          <TextField id="outlined-basic" label="Name" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Passenger Count"
+            variant="outlined"
+          />
+        </Box>
+      </div>
+    );
+  }
   function test() {
     return (
       <div>
@@ -22,7 +60,7 @@ export default function Booking() {
     status: "test",
   };
   const dummy = {
-    id: "kadsbfasdfkajdf",
+    id: "FirstProdTest",
     createdAt: "12",
     departureTime: "12PM",
     departureLocation: "123 sant anna road",
@@ -56,9 +94,13 @@ export default function Booking() {
   }
 
   return (
-    <div>
-      <p>Booking Page</p>
+    <div className="space-y-2">
+      <Header pageName={"Bookings"} />
       {test()}
+      {bookingForm()}
+      <div className="flex flex-row-reverse">
+        <button className="bookCarButton ">Book Car</button>
+      </div>
     </div>
   );
 }
