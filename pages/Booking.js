@@ -2,7 +2,16 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Header from "../components/Header";
+import { useState } from "react";
+import makeid from "../utilities/makeid";
 export default function Booking() {
+  const [DepartureTime, setDepartureTime] = useState("");
+  const [DepartureAddress, setDepartureAddress] = useState("");
+  const [DestinationAddress, setDestinationAddress] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [Name, setName] = useState("");
+  const [PassengerCount, setPassengerCount] = useState("");
+
   function bookingForm() {
     return (
       <div className="flex justify-center space-y-2 bookingForm">
@@ -16,37 +25,72 @@ export default function Booking() {
             id="outlined-basic"
             label="Departure Time"
             variant="outlined"
+            value={DepartureTime}
+            onChange={(e) => setDepartureTime(e.target.value)}
           />
           <TextField
             id="outlined-basic"
             label="Departure Address"
             variant="outlined"
+            value={DepartureAddress}
+            onChange={(e) => setDepartureAddress(e.target.value)}
           />
           <TextField
             id="outlined-basic"
             label="Destination Address"
             variant="outlined"
+            value={DestinationAddress}
+            onChange={(e) => setDestinationAddress(e.target.value)}
           />
-          <TextField id="outlined-basic" label="Phone#" variant="outlined" />
-          <TextField id="outlined-basic" label="Name" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Phone#"
+            variant="outlined"
+            value={Phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Name"
+            variant="outlined"
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
+          />
           <TextField
             id="outlined-basic"
             label="Passenger Count"
             variant="outlined"
+            type="number"
+            value={PassengerCount}
+            onChange={(e) => setPassengerCount(e.target.valueAsNumber)}
           />
-          <p>test</p>
         </Box>
       </div>
     );
+  }
+  function bookCar() {
+    const data = {
+      id: makeid(10),
+      createdAt: Date.now(),
+      departureTime: DepartureTime,
+      departureLocation: DepartureAddress,
+      destinationLocation: DestinationAddress,
+      customerName: Name,
+      passengerCount: PassengerCount,
+      customerPhoneNumber: Phone,
+      autoSelectCar: true,
+      carModel: "Nissan Leaf",
+      urgent: false,
+    };
+    PutBooking(data);
+    console.log("Booking data");
+    console.log(data);
   }
   function test() {
     return (
       <div>
         <Button onClick={() => testGetBooking()} variant="text">
           Test GET
-        </Button>
-        <Button onClick={() => testPutBooking()} variant="text">
-          Test POST
         </Button>
       </div>
     );
@@ -73,25 +117,28 @@ export default function Booking() {
     carModel: "Nissan Leaf",
     urgent: false,
   };
+  const headers = {
+    "Access-Control-Allow-Headers": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,DELETE,GET",
+  };
 
   async function testGetBooking() {
     const data = fetch(
       "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/bookings",
       { method: "GET" }
-    ).then((res) => {
-      return res.json();
-    });
-    console.log(data);
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }
 
-  async function testPutBooking() {
+  async function PutBooking(bookingData) {
     const data = fetch(
       "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/bookings",
-      { method: "PUT", body: JSON.stringify(dummy) }
-    ).then((res) => {
-      return res.json();
-    });
-    console.log(data);
+      { method: "PUT", body: JSON.stringify(bookingData) }
+    )
+      .then((res) => res.json())
+      .then((result) => console.log(result));
   }
 
   return (
@@ -100,7 +147,9 @@ export default function Booking() {
       {test()}
       {bookingForm()}
       <div className="flex flex-row-reverse">
-        <button className="bookCarButton ">Book Car</button>
+        <button onClick={() => bookCar()} className="bookCarButton ">
+          Book Car
+        </button>
       </div>
     </div>
   );
