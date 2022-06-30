@@ -34,6 +34,7 @@ export default function Booking() {
             label="Passenger Count"
             variant="outlined"
           />
+          <p>test</p>
         </Box>
       </div>
     );

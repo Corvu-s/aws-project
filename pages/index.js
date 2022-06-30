@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Booking from "./Booking";
 export default function Home() {
   const router = useRouter();
+
   return <Booking />;
 }
 
