@@ -118,7 +118,9 @@ export default function Booking() {
     urgent: false,
   };
   const headers = {
-    "Access-Control-Allow-Headers": "application/json",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Headers":
+      "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,DELETE,GET",
   };
@@ -143,7 +145,7 @@ export default function Booking() {
 
   return (
     <div className="space-y-2">
-      <Header pageName={"Bookings"} />
+      <Header pageName={"Booking"} />
       {test()}
       {bookingForm()}
       <div className="flex flex-row-reverse">

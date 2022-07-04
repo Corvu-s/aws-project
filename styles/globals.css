@@ -28,6 +28,11 @@ body {
   height: 50px;
   background: #009ddc;
 }
+.headerBackButton:active,
+.headerBackButton:hover {
+  background: #005e84;
+}
+
 .headerBackText {
   font-style: normal;
   font-weight: 400;
@@ -42,4 +47,8 @@ body {
   width: 167px;
   height: 50px;
   background: #009ddc;
+}
+.bookCarButton:active,
+.bookCarButton:hover {
+  background: #005e84;
 }
