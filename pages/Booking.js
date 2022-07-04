@@ -1,8 +1,11 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import Switch from "@mui/material/Switch";
 import Header from "../components/Header";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
+import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 export default function Booking() {
   const [DepartureTime, setDepartureTime] = useState("");
@@ -11,7 +14,17 @@ export default function Booking() {
   const [Phone, setPhone] = useState("");
   const [Name, setName] = useState("");
   const [PassengerCount, setPassengerCount] = useState("");
+  const [autoSelect, setAutoSelect] = useState(true);
 
+  function cleanForm() {
+    setDepartureAddress("");
+    setDepartureTime("");
+    setDestinationAddress("");
+    setPhone("");
+    setName("");
+    setPassengerCount(1);
+    setAutoSelect(true);
+  }
   function bookingForm() {
     return (
       <div className="flex justify-center space-y-2 bookingForm">
@@ -63,6 +76,15 @@ export default function Booking() {
             type="number"
             value={PassengerCount}
             onChange={(e) => setPassengerCount(e.target.valueAsNumber)}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={autoSelect}
+                onChange={(event) => setAutoSelect(event.target.checked)}
+              />
+            }
+            label="Autoselect Car"
           />
         </Box>
       </div>
@@ -140,7 +162,8 @@ export default function Booking() {
       { method: "PUT", body: JSON.stringify(bookingData) }
     )
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => console.log(result))
+      .then(cleanForm());
   }
 
   return (
@@ -148,11 +171,7 @@ export default function Booking() {
       <Header pageName={"Booking"} />
       {test()}
       {bookingForm()}
-      <div className="flex flex-row-reverse">
-        <button onClick={() => bookCar()} className="bookCarButton ">
-          Book Car
-        </button>
-      </div>
+      <SubmitButton buttonName={"Book Car"} method={bookCar} />
     </div>
   );
 }

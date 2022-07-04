@@ -86,19 +86,19 @@ export default function Header({ pageName }) {
   );
   return (
     <div className="flex space-x-2 justify-center">
-      <div className="bookingButton flex justify-center">
-        <button className="headerModeText">{removeUnderscore()}</button>
+      <div className="pageTitle  flex justify-center">
+        <button className="pageTitleText">{removeUnderscore()}</button>
       </div>
-      <div className="headerBackButton flex justify-center">
+      <div className=" flex justify-center">
         {/* <button className="headerBackText">Back</button> */}
         {["Menu"].map((anchor) => (
           <React.Fragment key={anchor}>
-            <Button
-              className="headerBackText"
+            <button
+              className="headerBackButton headerBackText"
               onClick={toggleDrawer(anchor, true)}
             >
               {anchor}
-            </Button>
+            </button>
             <Drawer
               anchor={anchor}
               open={state[anchor]}
