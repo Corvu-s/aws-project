@@ -30,7 +30,7 @@ export default function AddCars() {
       make: make,
       model: model,
       depot: depot,
-      currentLocation: "",
+      currentLocation: depot,
       available: available,
       status: status,
     };

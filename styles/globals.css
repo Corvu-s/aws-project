@@ -49,7 +49,33 @@ body {
   color: #efeff0;
   background: #009ddc;
 }
-.bookCarButton:active,
-.bookCarButton:hover {
+.submitButton:active,
+.submitButton:hover {
   background: #005e84;
+}
+.searchBar {
+  background: #efeff0;
+}
+.searchBarButton {
+  width: 167px;
+  height: 50px;
+  background: #009ddc;
+  color: #ffffff;
+}
+.searchBarButton:active,
+.searchBarButton:hover {
+  background: #005e84;
+}
+.car {
+  background: #efeff0;
+}
+.availableIndicatorFalse {
+  width: 30px;
+  height: 30px;
+  background: #ff0000;
+}
+.availableIndicatorTrue {
+  width: 30px;
+  height: 30px;
+  background: #40ff00;
 }
