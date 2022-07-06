@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-
-export default function ManageCars() {
-  const [cars, setCars] = useState([]);
+import ClearIcon from "@mui/icons-material/Clear";
+export default function ManageCars({ carData }) {
+  const [cars, setCars] = useState(carData);
   const [numOfCars, setNumOfCars] = useState(0);
   async function getAllCars() {
     const data = fetch(
@@ -35,9 +35,7 @@ export default function ManageCars() {
           <p>Depot:{car.depot}</p>
           <p>Current Location:{car.currentLocation}</p>
         </div>
-        <div>
-          <button className={availablityIndicator(car)}></button>
-        </div>
+        <div>{availablityIndicator(car)}</div>
       </div>
     );
   }
@@ -51,10 +49,60 @@ export default function ManageCars() {
   }
   function availablityIndicator(car) {
     if (car.available) {
-      return "availableIndicatorTrue";
+      return (
+        <div className="flex flex-col space-y-2">
+          <button
+            onClick={() => handleAvailabilityChange(car)}
+            className="availableIndicatorTrue"
+          ></button>
+        </div>
+      );
     } else {
-      return "availableIndicatorFalse";
+      return (
+        <div className="flex flex-col space-y-2">
+          <button
+            onClick={() => handleAvailabilityChange(car)}
+            className="availableIndicatorFalse"
+          ></button>
+          <ClearIcon onClick={() => handleCarDelete(car)} />
+        </div>
+      );
     }
+  }
+  async function handleAvailabilityChange(car) {
+    console.log("Clicked " + car.id + " which is currently " + car.available);
+    //change the status of a car
+    let updatedData = car;
+    updatedData.available = !car.available;
+    console.log(updatedData);
+    const data = await fetch(
+      `https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars/${car.id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(updatedData),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        return data;
+      });
+  }
+  async function handleCarDelete(car) {
+    console.log("Clicked " + car.id + " to delete");
+    const data = await fetch(
+      `https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars/${car.id}`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        //filter out the removed car after a sucsessful delete
+        setCars(cars.filter((item) => item.id != car.id));
+      });
   }
   return (
     <div className="space-y-2">
@@ -69,4 +117,22 @@ export default function ManageCars() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const data = await fetch(
+    "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars",
+    {
+      method: "GET",
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      //console.log(data);
+
+      return data.Items;
+    });
+  return {
+    props: { carData: data },
+  };
 }

@@ -21,7 +21,7 @@ export default function Booking({ carData }) {
   const [autoSelect, setAutoSelect] = useState(true);
 
   //car selection from the dropdown list
-  const [carSelection, setCarSelection] = useState("");
+  const [carSelectionID, setCarSelectionID] = useState("");
   const [carList, setCarList] = useState(carData);
   function cleanForm() {
     setDepartureAddress("");
@@ -99,9 +99,17 @@ export default function Booking({ carData }) {
     );
   }
   function handleCarChange(e) {
-    setCarSelection(e.target.value);
+    setCarSelectionID(e.target.value);
   }
   function selectCar() {
+    //ensures that you get a unique car in the selection. Phase out when switch to MySql is done
+    const filteredCars = [];
+    carList.map((car) => {
+      if (!filteredCars.includes(car.model)) {
+        filteredCars.push(car.model);
+      }
+    });
+
     if (!autoSelect) {
       return (
         <>
@@ -109,14 +117,13 @@ export default function Booking({ carData }) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={carSelection}
+            value={carSelectionID}
             label="Age"
             onChange={handleCarChange}
           >
-            {carList.map((car, index) => (
-              <MenuItem key={index} value={car.model}>
-                {car.make}
-                {car.model}
+            {filteredCars.map((car, index) => (
+              <MenuItem key={index} value={car}>
+                {car}
               </MenuItem>
             ))}
           </Select>
@@ -135,7 +142,7 @@ export default function Booking({ carData }) {
       passengerCount: PassengerCount,
       customerPhoneNumber: Phone,
       autoSelectCar: true,
-      carModel: "Nissan Leaf",
+      carModel: carSelectionID,
       urgent: false,
     };
     PutBooking(data);
