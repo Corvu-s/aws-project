@@ -8,7 +8,9 @@ export default function ManageCars() {
   async function getAllCars() {
     const data = fetch(
       "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars",
-      { method: "GET" }
+      {
+        method: "GET",
+      }
     )
       .then((res) => res.json())
       .then((data) => {

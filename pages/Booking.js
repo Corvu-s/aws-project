@@ -1,13 +1,17 @@
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+
 import Switch from "@mui/material/Switch";
 import Header from "../components/Header";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
-export default function Booking() {
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+export default function Booking({ carData }) {
   const [DepartureTime, setDepartureTime] = useState("");
   const [DepartureAddress, setDepartureAddress] = useState("");
   const [DestinationAddress, setDestinationAddress] = useState("");
@@ -16,6 +20,9 @@ export default function Booking() {
   const [PassengerCount, setPassengerCount] = useState("");
   const [autoSelect, setAutoSelect] = useState(true);
 
+  //car selection from the dropdown list
+  const [carSelection, setCarSelection] = useState("");
+  const [carList, setCarList] = useState(carData);
   function cleanForm() {
     setDepartureAddress("");
     setDepartureTime("");
@@ -77,6 +84,7 @@ export default function Booking() {
             value={PassengerCount}
             onChange={(e) => setPassengerCount(e.target.valueAsNumber)}
           />
+          {selectCar()}
           <FormControlLabel
             control={
               <Switch
@@ -89,6 +97,32 @@ export default function Booking() {
         </Box>
       </div>
     );
+  }
+  function handleCarChange(e) {
+    setCarSelection(e.target.value);
+  }
+  function selectCar() {
+    if (!autoSelect) {
+      return (
+        <>
+          <p>Select Car</p>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={carSelection}
+            label="Age"
+            onChange={handleCarChange}
+          >
+            {carList.map((car) => (
+              <MenuItem value={car.model}>
+                {car.make}
+                {car.model}
+              </MenuItem>
+            ))}
+          </Select>
+        </>
+      );
+    }
   }
   function bookCar() {
     const data = {
@@ -108,53 +142,6 @@ export default function Booking() {
     console.log("Booking data");
     console.log(data);
   }
-  function test() {
-    return (
-      <div>
-        <Button onClick={() => testGetBooking()} variant="text">
-          Test GET
-        </Button>
-      </div>
-    );
-  }
-  const dummyCars = {
-    id: "adfasdfads",
-    make: "test",
-    model: "test",
-    depot: "test",
-    currentLocation: "test",
-    available: "test",
-    status: "test",
-  };
-  const dummy = {
-    id: "FirstProdTest",
-    createdAt: "12",
-    departureTime: "12PM",
-    departureLocation: "123 sant anna road",
-    destinationLocation: "456 adfhab",
-    customerName: "Jim",
-    passengerCount: "1",
-    customerPhoneNumber: 903453425,
-    autoSelectCar: true,
-    carModel: "Nissan Leaf",
-    urgent: false,
-  };
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Headers":
-      "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS,POST,PUT,DELETE,GET",
-  };
-
-  async function testGetBooking() {
-    const data = fetch(
-      "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/bookings",
-      { method: "GET" }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  }
 
   async function PutBooking(bookingData) {
     const data = fetch(
@@ -169,9 +156,28 @@ export default function Booking() {
   return (
     <div className="space-y-2">
       <Header pageName={"Booking"} />
-      {test()}
       {bookingForm()}
       <SubmitButton buttonName={"Book Car"} method={bookCar} />
     </div>
   );
+}
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+export async function getServerSideProps(context) {
+  const data = await fetch(
+    "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars",
+    {
+      method: "GET",
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      //console.log(data);
+
+      return data.Items;
+    });
+  return {
+    props: { carData: data },
+  };
 }
