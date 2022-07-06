@@ -113,8 +113,8 @@ export default function Booking({ carData }) {
             label="Age"
             onChange={handleCarChange}
           >
-            {carList.map((car) => (
-              <MenuItem value={car.model}>
+            {carList.map((car, index) => (
+              <MenuItem key={index} value={car.model}>
                 {car.make}
                 {car.model}
               </MenuItem>
