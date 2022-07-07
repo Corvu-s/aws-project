@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-robotaxiapp-dev-92251-authRole",
+      "UnauthRoleArn": "arn:aws:iam::351659483310:role/amplify-robotaxiapp-dev-92251-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::351659483310:role/amplify-robotaxiapp-dev-92251-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-robotaxiapp-dev-92251-deployment",
+      "UnauthRoleName": "amplify-robotaxiapp-dev-92251-unauthRole",
+      "StackName": "amplify-robotaxiapp-dev-92251",
+      "StackId": "arn:aws:cloudformation:us-west-2:351659483310:stack/amplify-robotaxiapp-dev-92251/e866bf80-fdf7-11ec-9a2b-0acb6f40c19b",
+      "AmplifyAppId": "d1v7xb08sfj0xb"
+    },
+    "categories": {
+      "auth": {
+        "robotaxiappb324b02b": {}
+      }
+    }
+  }
+}

@@ -11,6 +11,9 @@ import ListItemText from "@mui/material/ListItemText";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import BookIcon from "@mui/icons-material/Book";
+import SignOut from "./SignOut";
+import { Auth } from "aws-amplify";
+
 export default function Header({ pageName }) {
   const router = useRouter();
 
@@ -84,8 +87,20 @@ export default function Header({ pageName }) {
       </List>
     </Box>
   );
+
+  async function getCreds() {
+    console.log("Current Session");
+    Auth.currentSession()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    console.log("Attributes");
+    let user = await Auth.currentAuthenticatedUser();
+
+    const { attributes } = user;
+    console.log(attributes);
+  }
   return (
-    <div className="flex space-x-2 justify-center">
+    <div className="flex flex-wrap space-x-2 justify-center">
       <div className="pageTitle  flex justify-center">
         <button className="pageTitleText">{removeUnderscore()}</button>
       </div>
@@ -109,6 +124,10 @@ export default function Header({ pageName }) {
           </React.Fragment>
         ))}
       </div>
+      <SignOut />
+      <button onClick={() => getCreds()} className="submitButton">
+        Test Auth
+      </button>
     </div>
   );
 }
