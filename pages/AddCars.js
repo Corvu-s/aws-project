@@ -8,7 +8,7 @@ import { useState } from "react";
 import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-
+import ImageCarousel from "../components/ImageCarousel";
 export default function AddCars() {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -49,13 +49,15 @@ export default function AddCars() {
   }
   function carForm() {
     return (
-      <div className="flex justify-center space-y-2 bookingForm">
+      <div className="flex justify-center space-y-2 ">
         <Box
-          className="flex flex-col space-y-2"
+          className="flex flex-col space-y-2 px-10 py-10 bookingForm"
           component="form"
           noValidate
           autoComplete="off"
         >
+          <h2 className="text-lg font-bold">Add a Car</h2>
+
           <TextField
             id="outlined-basic"
             label="Make"
@@ -109,6 +111,7 @@ export default function AddCars() {
       <Header pageName={"Add_Cars"} />
       {carForm()}
       <SubmitButton buttonName={"Add Car"} method={addCar} />
+      <ImageCarousel />
     </div>
   );
 }

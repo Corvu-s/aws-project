@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
-
+import ImageCarousel from "../components/ImageCarousel";
 import Switch from "@mui/material/Switch";
 import Header from "../components/Header";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -34,13 +34,15 @@ export default function Booking({ carData }) {
   }
   function bookingForm() {
     return (
-      <div className="flex justify-center space-y-2 bookingForm">
+      <div className="flex justify-center space-y-2 ">
         <Box
-          className="flex flex-col space-y-2"
+          className="flex flex-col space-y-2 px-10 py-10 bookingForm"
           component="form"
           noValidate
           autoComplete="off"
         >
+          <h2 className="text-lg font-bold">Book a Car</h2>
+
           <TextField
             id="outlined-basic"
             label="Departure Time"
@@ -95,6 +97,7 @@ export default function Booking({ carData }) {
             label="Autoselect Car"
           />
         </Box>
+        <div></div>
       </div>
     );
   }
@@ -165,6 +168,7 @@ export default function Booking({ carData }) {
       <Header pageName={"Booking"} />
       {bookingForm()}
       <SubmitButton buttonName={"Book Car"} method={bookCar} />
+      <ImageCarousel />
     </div>
   );
 }

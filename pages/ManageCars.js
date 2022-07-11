@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ClearIcon from "@mui/icons-material/Clear";
+import Analytics from "../components/Analytics";
 export default function ManageCars({ carData }) {
   const [cars, setCars] = useState(carData);
   const [numOfCars, setNumOfCars] = useState(0);
@@ -112,6 +113,7 @@ export default function ManageCars({ carData }) {
       <div className="flex justify-center flex-col space-y-2">
         {displayCars()}
       </div>
+      <Analytics carData={carData} />
     </div>
   );
 }
