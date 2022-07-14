@@ -2,6 +2,9 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 export default function ImageCarousel() {
+  //service outage image
+  //welcome image
+  //news?
   return (
     <div>
       <Carousel autoPlay={true}>

@@ -11,6 +11,7 @@ import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+
 export default function Booking({ carData }) {
   const [DepartureTime, setDepartureTime] = useState("");
   const [DepartureAddress, setDepartureAddress] = useState("");

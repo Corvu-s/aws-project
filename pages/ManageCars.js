@@ -113,7 +113,7 @@ export default function ManageCars({ carData }) {
       <div className="flex justify-center flex-col space-y-2">
         {displayCars()}
       </div>
-      <Analytics carData={carData} />
+      <Analytics carData={cars} />
     </div>
   );
 }
