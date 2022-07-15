@@ -105,7 +105,7 @@ export default function Header({ pageName }) {
   return (
     <div className="  flex flex-wrap space-x-10 justify-center headerBanner ">
       <div className="flex justify-center space-x-10">
-        <div class="grid gap-4 grid-cols-2 ">
+        <div className="grid gap-4 grid-cols-2 ">
           <div>
             <DirectionsCarIcon />
           </div>
