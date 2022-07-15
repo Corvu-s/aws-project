@@ -9,11 +9,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import BookIcon from "@mui/icons-material/Book";
 import SignOut from "./SignOut";
 import { Auth } from "aws-amplify";
 
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import ElectricalServicesIcon from "@mui/icons-material/ElectricalServices";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import CellTowerIcon from "@mui/icons-material/CellTower";
 export default function Header({ pageName }) {
   const router = useRouter();
 
@@ -100,7 +103,24 @@ export default function Header({ pageName }) {
     console.log(attributes);
   }
   return (
-    <div className="flex flex-wrap space-x-2 justify-center">
+    <div className="  flex flex-wrap space-x-10 justify-center headerBanner ">
+      <div className="flex justify-center space-x-10">
+        <div class="grid gap-4 grid-cols-2 ">
+          <div>
+            <DirectionsCarIcon />
+          </div>
+          <div>
+            <ElectricalServicesIcon />
+          </div>
+          <div>
+            <PhoneAndroidIcon />
+          </div>
+          <div>
+            <CellTowerIcon />
+          </div>
+        </div>
+      </div>
+
       <div className="pageTitle  flex justify-center">
         <button className="pageTitleText">{removeUnderscore()}</button>
       </div>
@@ -125,9 +145,9 @@ export default function Header({ pageName }) {
         ))}
       </div>
       <SignOut />
-      <button onClick={() => getCreds()} className="submitButton">
+      {/* <button onClick={() => getCreds()} className="submitButton">
         Test Auth
-      </button>
+      </button> */}
     </div>
   );
 }

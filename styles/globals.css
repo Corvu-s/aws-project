@@ -14,7 +14,7 @@ body {
   font-family: sans-serif;
 }
 .pageTitle {
-  background: #e6f4f8;
+  background: #b5dfeb;
   width: 182px;
   height: 50px;
 }
@@ -32,6 +32,9 @@ body {
 .headerBackButton:hover {
   background: #005e84;
 }
+.headerBanner {
+  background: #e6f4f8;
+}
 
 .headerBackText {
   font-style: normal;
@@ -46,7 +49,7 @@ body {
 .submitButton {
   width: 167px;
   height: 50px;
-  color: #efeff0;
+  color: #ffffff;
   background: #009ddc;
 }
 .submitButton:active,
@@ -81,4 +84,22 @@ body {
 }
 .altBackground {
   background: #e6f4f8;
+}
+.carouselButton {
+  border-radius: 25px;
+  height: 50px;
+  padding: 5px;
+  color: #efeff0;
+  background: #009ddc;
+}
+
+.carouselButton:active,
+.carouselButton:hover {
+  background: #005e84;
+}
+.title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 24px;
 }
