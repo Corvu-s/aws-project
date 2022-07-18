@@ -10,8 +10,29 @@ import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import { useState } from "react";
+import { useEffect } from "react";
+
 export default function Alerts() {
   //render a list of alerts to the status secion
+
+  async function getAlerts() {
+    const data = await fetch(
+      "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/alerts",
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Alerts");
+        console.log(data);
+
+        return data.Items;
+      });
+    console.log(data);
+    return data;
+  }
   const alertData = [
     {
       location: "123 Street W",
@@ -74,6 +95,8 @@ export default function Alerts() {
       lastUpdated: "now",
     },
   ];
+  const [alerts, setAlerts] = useState(alertData);
+
   function determineIcon(type) {
     if (type == "System Down") {
       return <SignalWifi0BarIcon />;
@@ -83,15 +106,50 @@ export default function Alerts() {
       return <AccessTimeIcon />;
     }
   }
-  return (
-    <div>
+  function displayAlertList() {
+    //set this var to the default hardcoded data.
+    let alertsToDisplay;
+
+    if (alerts == undefined || alerts.length == 0) {
+      //if the data from the db is undefined or there is no data, render the default stuff
+      alertsToDisplay = alertData;
+    } else {
+      //otherwise set the data to display to the data got from the db
+      alertsToDisplay = alerts;
+    }
+    return (
       <List
         sx={{
           overflow: "auto",
           maxHeight: 500,
         }}
       >
-        {alertData.map((alert, index) => (
+        {alertsToDisplay.map((alert, index) => (
+          <ListItem key={index} className="flex flex-wrap">
+            <ListItemAvatar>
+              <Avatar>{determineIcon(alert.status)}</Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={alert.status + " at " + alert.location}
+              secondary="Jan 9, 2014"
+            />
+          </ListItem>
+        ))}
+      </List>
+    );
+  }
+  return (
+    <div>
+      <button className="submitButton" onClick={() => getAlerts()}>
+        Refresh
+      </button>
+      <List
+        sx={{
+          overflow: "auto",
+          maxHeight: 500,
+        }}
+      >
+        {alerts.map((alert, index) => (
           <ListItem key={index} className="flex flex-wrap">
             <ListItemAvatar>
               <Avatar>{determineIcon(alert.status)}</Avatar>
@@ -106,3 +164,23 @@ export default function Alerts() {
     </div>
   );
 }
+
+// export async function getServerSideProps(context) {
+//   //get the most up do date alert data from the db
+//   const data = await fetch(
+//     "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/alerts",
+//     {
+//       method: "GET",
+//     }
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log("Alerts");
+//       console.log(data);
+
+//       return data.Items;
+//     });
+//   return {
+//     props: { alertData: data },
+//   };
+// }

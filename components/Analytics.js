@@ -35,22 +35,15 @@ export default function Analytics({ carData }) {
   }
 
   return (
-    <div className="flex  flex-col">
-      <button>get Stats</button>
-
-      <div className=" w-1/2">
-        <Doughnut
-          data={generateAvailabilityGraphData()}
-          height={20}
-          width={20}
-        />
-      </div>
-      <div className="w-1/2">
-        <Doughnut
-          data={generateAvailabilityGraphData()}
-          height={20}
-          width={20}
-        />
+    <div className="flex  flex-wrap w-1/2">
+      <button className="submitButton">Update Stats</button>
+      <div id="chart container">
+        <div>
+          <Doughnut data={generateAvailabilityGraphData()} />
+        </div>
+        <div>
+          <Doughnut data={generateAvailabilityGraphData()} />
+        </div>
       </div>
     </div>
   );

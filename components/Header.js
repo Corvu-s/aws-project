@@ -103,8 +103,8 @@ export default function Header({ pageName }) {
     console.log(attributes);
   }
   return (
-    <div className="  flex flex-wrap space-x-10 justify-center headerBanner ">
-      <div className="flex justify-center space-x-10">
+    <div className="  flex flex-wrap  justify-center headerBanner ">
+      {/* <div className="flex justify-center space-x-10">
         <div className="grid gap-4 grid-cols-2 ">
           <div>
             <DirectionsCarIcon />
@@ -119,7 +119,7 @@ export default function Header({ pageName }) {
             <CellTowerIcon />
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="pageTitle  flex justify-center">
         <button className="pageTitleText">{removeUnderscore()}</button>
