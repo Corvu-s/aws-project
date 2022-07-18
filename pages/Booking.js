@@ -11,8 +11,8 @@ import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-
-export default function Booking({ carData }) {
+import { Auth } from "aws-amplify";
+export default function Booking({ carData, alertData }) {
   const [DepartureTime, setDepartureTime] = useState("");
   const [DepartureAddress, setDepartureAddress] = useState("");
   const [DestinationAddress, setDestinationAddress] = useState("");
@@ -24,6 +24,20 @@ export default function Booking({ carData }) {
   //car selection from the dropdown list
   const [carSelectionID, setCarSelectionID] = useState("");
   const [carList, setCarList] = useState(carData);
+
+  async function getCreds() {
+    // console.log("Current Session");
+    // Auth.currentSession()
+    //   .then((data) => console.log(data))
+    //   .catch((err) => console.log(err));
+    // console.log("Attributes");
+    let user = await Auth.currentAuthenticatedUser();
+
+    const { attributes } = user;
+    console.log(attributes);
+    return attributes.email;
+  }
+  getCreds();
   function cleanForm() {
     setDepartureAddress("");
     setDepartureTime("");
@@ -169,7 +183,7 @@ export default function Booking({ carData }) {
       <Header pageName={"Booking"} />
       {bookingForm()}
       <SubmitButton buttonName={"Book Car"} method={bookCar} />
-      <ImageCarousel />
+      <ImageCarousel alerts={alertData} />
     </div>
   );
 }
@@ -177,6 +191,20 @@ export default function Booking({ carData }) {
 // You should use getServerSideProps when:
 // - Only if you need to pre-render a page whose data must be fetched at request time
 export async function getServerSideProps(context) {
+  const alerts = await fetch(
+    "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/alerts",
+    {
+      method: "GET",
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Alerts");
+      console.log(data);
+
+      return data.Items;
+    });
+
   const data = await fetch(
     "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/cars",
     {
@@ -190,6 +218,6 @@ export async function getServerSideProps(context) {
       return data.Items;
     });
   return {
-    props: { carData: data },
+    props: { carData: data, alertData: alerts },
   };
 }

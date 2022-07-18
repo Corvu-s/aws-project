@@ -9,7 +9,7 @@ import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import ImageCarousel from "../components/ImageCarousel";
-export default function AddCars() {
+export default function AddCars({ alertData }) {
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
   const [depot, setDepot] = useState("");
@@ -111,7 +111,26 @@ export default function AddCars() {
       <Header pageName={"Add_Cars"} />
       {carForm()}
       <SubmitButton buttonName={"Add Car"} method={addCar} />
-      <ImageCarousel />
+      <ImageCarousel alerts={alertData} />
     </div>
   );
+}
+export async function getServerSideProps(context) {
+  //get the most up do date alert data from the db
+  const data = await fetch(
+    "https://unce5d4pv3.execute-api.us-west-2.amazonaws.com/dev/alerts",
+    {
+      method: "GET",
+    }
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Alerts");
+      console.log(data);
+
+      return data.Items;
+    });
+  return {
+    props: { alertData: data },
+  };
 }

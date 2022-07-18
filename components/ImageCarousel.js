@@ -2,17 +2,18 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Alerts from "./Alerts";
 import { useRouter } from "next/dist/client/router";
-export default function ImageCarousel() {
+export default function ImageCarousel({ alerts }) {
   //service outage image
   //welcome image
   //learn about EVs
+
   const router = useRouter();
 
   return (
     <div className="flex space-x-2 space-y-3 flex-wrap justify-center">
       <div className="altBackground w-full ">
         <p className="text-lg font-bold">Outages and Statuses</p>
-        <Alerts />
+        <Alerts alerts={alerts} />
       </div>
       <Carousel
         autoPlay={true}
