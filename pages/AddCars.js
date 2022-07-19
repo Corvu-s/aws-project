@@ -35,8 +35,8 @@ export default function AddCars({ alertData }) {
       status: status,
     };
     putCar(data);
-    console.log("Booking data");
-    console.log(data);
+    // console.log("Booking data");
+    // console.log(data);
   }
   async function putCar(carData) {
     const data = fetch(
@@ -44,8 +44,7 @@ export default function AddCars({ alertData }) {
       { method: "PUT", body: JSON.stringify(carData) }
     )
       .then((res) => res.json())
-      .then((result) => console.log(result))
-      .then(cleanForm());
+      .then((result) => cleanForm());
   }
   function carForm() {
     return (
@@ -125,8 +124,8 @@ export async function getServerSideProps(context) {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log("Alerts");
-      console.log(data);
+      // console.log("Alerts");
+      // console.log(data);
 
       return data.Items;
     });

@@ -23,7 +23,7 @@ export default function ImageCarousel({ alerts }) {
         className=" bookingForm "
       >
         <div>
-          <img src="/placeholder.png" />
+          <img src="/roadWork.jpg" />
 
           <div className="legend">
             <button className="carouselButton">Learn</button>

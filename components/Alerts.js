@@ -109,6 +109,7 @@ export default function Alerts({ alerts }) {
               primary={alert.status + " at " + alert.location}
               secondary={alert.reason}
             />
+            <ListItemText secondary={alert.lastUpdated} />
           </ListItem>
         ))}
       </List>

@@ -164,8 +164,8 @@ export default function Booking({ carData, alertData }) {
       urgent: false,
     };
     PutBooking(data);
-    console.log("Booking data");
-    console.log(data);
+    // console.log("Booking data");
+    // console.log(data);
   }
 
   async function PutBooking(bookingData) {
@@ -174,8 +174,7 @@ export default function Booking({ carData, alertData }) {
       { method: "PUT", body: JSON.stringify(bookingData) }
     )
       .then((res) => res.json())
-      .then((result) => console.log(result))
-      .then(cleanForm());
+      .then((result) => cleanForm());
   }
 
   return (
@@ -199,8 +198,8 @@ export async function getServerSideProps(context) {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log("Alerts");
-      console.log(data);
+      // console.log("Alerts");
+      // console.log(data);
 
       return data.Items;
     });
