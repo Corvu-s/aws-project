@@ -23,6 +23,8 @@ These are the backend resources this app makes use of. You can find some of thei
 - Code Commit
 - Code Build
 
+### Architectural Diagram
+![alt text](https://robotaxi-project-images.s3.us-west-2.amazonaws.com/v4_design.jpg "Diagram")
 
 ## Run Locally
 
