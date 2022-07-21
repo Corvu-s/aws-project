@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "robotaxiappb324b02b": {}
+        "robotaxiappb324b02b": {},
+        "true": {}
       }
     }
   }

@@ -12,6 +12,7 @@ import makeid from "../utilities/makeid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { Auth } from "aws-amplify";
+import Map from "../components/Map";
 export default function Booking({ carData, alertData }) {
   const [DepartureTime, setDepartureTime] = useState("");
   const [DepartureAddress, setDepartureAddress] = useState("");
@@ -25,19 +26,6 @@ export default function Booking({ carData, alertData }) {
   const [carSelectionID, setCarSelectionID] = useState("");
   const [carList, setCarList] = useState(carData);
 
-  async function getCreds() {
-    // console.log("Current Session");
-    // Auth.currentSession()
-    //   .then((data) => console.log(data))
-    //   .catch((err) => console.log(err));
-    // console.log("Attributes");
-    let user = await Auth.currentAuthenticatedUser();
-
-    const { attributes } = user;
-    console.log(attributes);
-    return attributes.email;
-  }
-  getCreds();
   function cleanForm() {
     setDepartureAddress("");
     setDepartureTime("");

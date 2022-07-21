@@ -24,5 +24,56 @@
         ]
       }
     }
+  },
+  "geo": {
+    "placeindex3b20cfb4": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex",
+      "dataProvider": "HERE",
+      "dataSourceIntendedUse": "SingleUse",
+      "accessType": "AuthorizedUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "robotaxiappb324b02b",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "ProjectFrontendMap": {
+      "isDefault": false,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriStreets",
+      "accessType": "AuthorizedUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "robotaxiappb324b02b",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    },
+    "ProjectMap": {
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Map",
+      "mapStyle": "VectorEsriStreets",
+      "accessType": "AuthorizedAndGuestUsers",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "robotaxiappb324b02b",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
   }
 }

@@ -145,9 +145,9 @@ export default function Header({ pageName }) {
         ))}
       </div>
       <SignOut />
-      {/* <button onClick={() => getCreds()} className="submitButton">
+      <button onClick={() => getCreds()} className="submitButton">
         Test Auth
-      </button> */}
+      </button>
     </div>
   );
 }

@@ -18,7 +18,7 @@ function Home({ signOut, user }) {
         <CardMedia
           component="img"
           height="140"
-          image="https://robotaxi-project-images.s3.us-west-2.amazonaws.com/aws.jpg"
+          image="/aws.jpg"
           alt="green iguana"
         />
         <CardContent>

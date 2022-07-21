@@ -23,21 +23,21 @@ export default function ImageCarousel({ alerts }) {
         className=" bookingForm "
       >
         <div>
-          <img src="https://robotaxi-project-images.s3.us-west-2.amazonaws.com/roadWork.jpg" />
+          <img src="/roadWork.jpg" />
 
           <div className="legend">
             <button className="carouselButton">Learn</button>
           </div>
         </div>
         <div>
-          <img src="https://robotaxi-project-images.s3.us-west-2.amazonaws.com/ev.jpg" />
+          <img src="/ev.jpg" />
 
           <div className="legend">
             <button className="carouselButton">Learn about our EVs!</button>
           </div>
         </div>
         <div>
-          <img src="https://robotaxi-project-images.s3.us-west-2.amazonaws.com/transit.jpg" />
+          <img src="/transit.jpg" />
           <div className="legend flex justify-center space-x-3">
             <button className="carouselButton">
               Learn about our transit solution!

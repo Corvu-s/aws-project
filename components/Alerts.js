@@ -1,15 +1,13 @@
 import AccessTimeIcon from "@mui/icons-material/AccessTime"; //Heavy Traffic
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb"; //no access
 import SignalWifi0BarIcon from "@mui/icons-material/SignalWifi0Bar"; // System down
-
+import TaxiAlertIcon from "@mui/icons-material/TaxiAlert";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -86,6 +84,8 @@ export default function Alerts({ alerts }) {
       return <DoNotDisturbIcon />;
     } else if (type == "Heavy Traffic") {
       return <AccessTimeIcon />;
+    } else {
+      return <TaxiAlertIcon />;
     }
   }
 
