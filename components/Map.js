@@ -1,13 +1,15 @@
 import { MapView, LocationSearch } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-import { Amplify } from "aws-amplify";
-import awsExports from "../aws-exports";
-Amplify.configure(awsExports);
 
 export default function Map() {
   return (
-    <div className="container">
-      <MapView>
+    <div>
+      <MapView
+        initialViewState={{
+          longitude: -122.3381659,
+          latitude: 47.615686,
+          zoom: 1,
+        }}
+      >
         <LocationSearch />
       </MapView>
     </div>

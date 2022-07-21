@@ -16,12 +16,6 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "Arn": "string"
         },
-        "ProjectFrontendMap": {
-            "Name": "string",
-            "Style": "string",
-            "Region": "string",
-            "Arn": "string"
-        },
         "ProjectMap": {
             "Name": "string",
             "Style": "string",

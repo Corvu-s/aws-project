@@ -35,9 +35,6 @@ const awsmobile = {
             },
             "maps": {
                 "items": {
-                    "ProjectFrontendMap-dev": {
-                        "style": "VectorEsriStreets"
-                    },
                     "ProjectMap-dev": {
                         "style": "VectorEsriStreets"
                     }

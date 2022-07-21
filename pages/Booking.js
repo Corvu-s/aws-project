@@ -13,8 +13,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { Auth } from "aws-amplify";
 import Map from "../components/Map";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { StaticTimePicker } from "@mui/x-date-pickers/StaticTimePicker";
 export default function Booking({ carData, alertData }) {
-  const [DepartureTime, setDepartureTime] = useState("");
   const [DepartureAddress, setDepartureAddress] = useState("");
   const [DestinationAddress, setDestinationAddress] = useState("");
   const [Phone, setPhone] = useState("");
@@ -25,6 +28,8 @@ export default function Booking({ carData, alertData }) {
   //car selection from the dropdown list
   const [carSelectionID, setCarSelectionID] = useState("");
   const [carList, setCarList] = useState(carData);
+
+  const [DepartureTime, setDepartureTime] = useState(new Date());
 
   function cleanForm() {
     setDepartureAddress("");
@@ -46,13 +51,16 @@ export default function Booking({ carData, alertData }) {
         >
           <h2 className="text-lg font-bold">Book a Car</h2>
 
-          <TextField
-            id="outlined-basic"
-            label="Departure Time"
-            variant="outlined"
-            value={DepartureTime}
-            onChange={(e) => setDepartureTime(e.target.value)}
-          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <StaticTimePicker
+              displayStaticWrapperAs="mobile"
+              value={DepartureTime}
+              onChange={(newValue) => {
+                setDepartureTime(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           <TextField
             id="outlined-basic"
             label="Departure Address"

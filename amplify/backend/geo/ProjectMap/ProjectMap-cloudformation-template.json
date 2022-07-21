@@ -328,6 +328,5 @@
         ]
       }
     }
-  },
-  "Description": "{\"createdOn\":\"Windows\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.5.1\",\"stackType\":\"geo-Map\",\"metadata\":{}}"
+  }
 }

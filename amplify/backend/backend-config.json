@@ -43,22 +43,6 @@
         }
       ]
     },
-    "ProjectFrontendMap": {
-      "isDefault": false,
-      "providerPlugin": "awscloudformation",
-      "service": "Map",
-      "mapStyle": "VectorEsriStreets",
-      "accessType": "AuthorizedUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "robotaxiappb324b02b",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
-    },
     "ProjectMap": {
       "isDefault": true,
       "providerPlugin": "awscloudformation",
