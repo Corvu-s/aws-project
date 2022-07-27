@@ -41,9 +41,9 @@ export default function Analytics({ carData }) {
         <div>
           <Doughnut data={generateAvailabilityGraphData()} />
         </div>
-        <div>
+        {/* <div>
           <Doughnut data={generateAvailabilityGraphData()} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

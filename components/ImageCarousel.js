@@ -15,42 +15,44 @@ export default function ImageCarousel({ alerts }) {
         <p className="text-lg font-bold">Outages and Statuses</p>
         <Alerts alerts={alerts} />
       </div>
-      <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
-        showArrows={true}
-        interval={5000}
-        className=" bookingForm "
-      >
-        <div>
-          <img src="/roadWork.jpg" />
+      <div className="w-1/2">
+        <Carousel
+          autoPlay={true}
+          infiniteLoop={true}
+          showArrows={true}
+          interval={5000}
+          className=" bookingForm "
+        >
+          <div>
+            <img src="/roadWork.jpg" />
 
-          <div className="legend">
-            <button className="carouselButton">Learn</button>
+            <div className="legend">
+              <button className="carouselButton">Learn</button>
+            </div>
           </div>
-        </div>
-        <div>
-          <img src="/ev.jpg" />
+          <div>
+            <img src="/ev.jpg" />
 
-          <div className="legend">
-            <button className="carouselButton">Learn about our EVs!</button>
+            <div className="legend">
+              <button className="carouselButton">Learn about our EVs!</button>
+            </div>
           </div>
-        </div>
-        <div>
-          <img src="/transit.jpg" />
-          <div className="legend flex justify-center space-x-3">
-            <button className="carouselButton">
-              Learn about our transit solution!
-            </button>
-            <button
-              onClick={() => router.push("/Booking")}
-              className="carouselButton"
-            >
-              Book a car!
-            </button>
+          <div>
+            <img src="/transit.jpg" />
+            <div className="legend flex justify-center space-x-3">
+              <button className="carouselButton">
+                Learn about our transit solution!
+              </button>
+              <button
+                onClick={() => router.push("/Booking")}
+                className="carouselButton"
+              >
+                Book a car!
+              </button>
+            </div>
           </div>
-        </div>
-      </Carousel>
+        </Carousel>
+      </div>
     </div>
   );
 }

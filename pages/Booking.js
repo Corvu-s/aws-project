@@ -132,7 +132,7 @@ export default function Booking({ carData, alertData }) {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={carSelectionID}
-            label="Age"
+            label="Car"
             onChange={handleCarChange}
           >
             {filteredCars.map((car, index) => (

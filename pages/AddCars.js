@@ -9,13 +9,21 @@ import SubmitButton from "../components/SubmitButton";
 import makeid from "../utilities/makeid";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import ImageCarousel from "../components/ImageCarousel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 export default function AddCars({ alertData }) {
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
   const [depot, setDepot] = useState("");
   const [available, setAvailable] = useState(false);
   const [status, setStatus] = useState("");
+  const [carSelection, setCarSelection] = useState("");
+  const [carSelectionID, setCarSelectionID] = useState("");
 
+  const cars = [
+    { id: 1, make: "Tesla", model: "Model Y" },
+    { id: 2, make: "Nissan", model: "Leaf" },
+    { id: 3, make: "Rivian", model: "R1T" },
+    { id: 4, make: "Lucid", model: "Air" },
+  ];
   function cleanForm() {
     setAvailable(false);
     setMake("");
@@ -23,12 +31,15 @@ export default function AddCars({ alertData }) {
     setModel("");
     setStatus("");
   }
+  function handleCarChange(e) {
+    setCarSelection(e.target.value);
+  }
   function addCar() {
     const data = {
       id: makeid(10),
       createdAt: Date.now(),
-      make: make,
-      model: model,
+      make: cars[carSelectionID].make,
+      model: cars[carSelectionID].model,
       depot: depot,
       currentLocation: depot,
       available: available,
@@ -56,21 +67,6 @@ export default function AddCars({ alertData }) {
           autoComplete="off"
         >
           <h2 className="text-lg font-bold">Add a Car</h2>
-
-          <TextField
-            id="outlined-basic"
-            label="Make"
-            variant="outlined"
-            value={make}
-            onChange={(e) => setMake(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Model"
-            variant="outlined"
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-          />
           <TextField
             id="outlined-basic"
             label="Depot"
@@ -78,6 +74,24 @@ export default function AddCars({ alertData }) {
             value={depot}
             onChange={(e) => setDepot(e.target.value)}
           />
+          <p>Select Car Type</p>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={carSelection}
+            label="Car"
+            onChange={handleCarChange}
+          >
+            {cars.map((car, index) => (
+              <MenuItem
+                key={index}
+                value={car.make + " " + car.model}
+                onClick={() => setCarSelectionID(index)}
+              >
+                {car.make + " " + car.model}
+              </MenuItem>
+            ))}
+          </Select>
           {/* <TextField
             id="outlined-basic"
             label="Status"
