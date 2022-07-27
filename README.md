@@ -24,7 +24,7 @@ These are the backend resources this app makes use of. You can find some of thei
 - Code Build
 
 ### Architectural Diagram
-![alt text](https://robotaxi-project-images.s3.us-west-2.amazonaws.com/v4_design.jpg "Diagram")
+![alt text](https://gitlab.aws.dev/lukelin/project-frontend/-/raw/main/ReadmePics/v4_design.jpg)
 
 ## Run Locally
 
