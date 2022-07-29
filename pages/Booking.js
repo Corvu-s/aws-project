@@ -31,6 +31,7 @@ export default function Booking({ carData, alertData }) {
 
   const [DepartureTime, setDepartureTime] = useState(new Date());
 
+  const [showMap, setShowMap] = useState(false);
   function cleanForm() {
     setDepartureAddress("");
     setDepartureTime("");
@@ -40,6 +41,7 @@ export default function Booking({ carData, alertData }) {
     setPassengerCount(1);
     setAutoSelect(true);
   }
+
   function bookingForm() {
     return (
       <div className="flex justify-center space-y-2 ">
@@ -50,7 +52,6 @@ export default function Booking({ carData, alertData }) {
           autoComplete="off"
         >
           <h2 className="text-lg font-bold">Book a Car</h2>
-
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <StaticTimePicker
               displayStaticWrapperAs="mobile"
@@ -61,13 +62,16 @@ export default function Booking({ carData, alertData }) {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
+
           <TextField
             id="outlined-basic"
             label="Departure Address"
             variant="outlined"
             value={DepartureAddress}
             onChange={(e) => setDepartureAddress(e.target.value)}
+            onClick={() => console.log("Cjkasndf")}
           />
+
           <TextField
             id="outlined-basic"
             label="Destination Address"
@@ -75,6 +79,7 @@ export default function Booking({ carData, alertData }) {
             value={DestinationAddress}
             onChange={(e) => setDestinationAddress(e.target.value)}
           />
+
           <TextField
             id="outlined-basic"
             label="Phone#"
@@ -111,6 +116,9 @@ export default function Booking({ carData, alertData }) {
         <div></div>
       </div>
     );
+  }
+  function displayMap(addressType) {
+    return <Map />;
   }
   function handleCarChange(e) {
     setCarSelectionID(e.target.value);
@@ -176,7 +184,12 @@ export default function Booking({ carData, alertData }) {
   return (
     <div className="space-y-2">
       <Header pageName={"Booking"} />
-      {bookingForm()}
+      <div className="flex">
+        {" "}
+        {bookingForm()}
+        {displayMap()}
+      </div>
+
       <SubmitButton buttonName={"Book Car"} method={bookCar} />
       <ImageCarousel alerts={alertData} />
     </div>

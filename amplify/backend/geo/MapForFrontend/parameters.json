@@ -5,7 +5,7 @@
   "unauthRoleName": {
     "Ref": "UnauthRoleName"
   },
-  "mapName": "ProjectMap",
+  "mapName": "MapForFrontend",
   "mapStyle": "VectorEsriStreets",
-  "isDefault": false
+  "isDefault": true
 }
